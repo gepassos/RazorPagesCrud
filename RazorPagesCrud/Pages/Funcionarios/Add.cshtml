@@ -5,10 +5,9 @@
 }
 
 <form method="post" class="needs-validation" novalidate>
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    
         <h1 class="mb-3">Adicione um novo funcionário</h1>
-        <a href="/Funcionarios/list" class="btn btn-primary">Voltar</a>
-    </div>
+
 
     @if (!string.IsNullOrWhiteSpace(message))
     {
@@ -47,8 +46,9 @@
         <div class="invalid-feedback">Por favor, preencha o campo Departamento.</div>
     </div>
 
-    <div class="mb-3">
-        <button type="submit" class="btn btn-primary">Save</button>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="/Funcionarios/list" class="btn btn-secondary">Voltar</a>
     </div>
 </form>
 

@@ -1,52 +1,79 @@
 ﻿@page "{id:Guid}"
 @model RazorPagesCrud.Pages.Funcionarios.EditModel
 @{
-	var message = ViewData["message"]?.ToString();
+    var message = ViewData["message"]?.ToString();
 }
 
-<form method="post">
-<h1 class="mb-3">Editar funcionário</h1>
+<form method="post" class="needs-validation" novalidate>
+    <h1 class="mb-3">Editar funcionário</h1>
 
-	@if (!string.IsNullOrWhiteSpace(message))
-	{
-		<div class="alert alert-success" role="alert">
-			@message
-		</div>
-	}
-	<div class="mb-3">
-		<label class="form-label">Id</label>
-		<input type="text" class="form-control " asp-for="EditFuncionarioViewModel.Id" readonly />
-	</div>
+    @if (!string.IsNullOrWhiteSpace(message))
+    {
+        <div class="alert alert-success" role="alert">
+            @message
+        </div>
+    }
 
-	<div class="mb-3">
-		<label class="form-label">Nome</label>
-		<input type="text" class="form-control " asp-for="EditFuncionarioViewModel.Name"/> 
-	</div>
-	<div class="mb-3">
-		<label class="form-label">Email</label>
-		<input type="email" class="form-control " asp-for="EditFuncionarioViewModel.Email" />
-	</div>
-	<div class="mb-3">
-		<label class="form-label">Salário</label>
-		<input type="number" class="form-control " asp-for="EditFuncionarioViewModel.Salary" />
-	</div>
-	<div class="mb-3">
-		<label class="form-label">Data de Nascimento</label>
-		<input type="date" class="form-control " asp-for="EditFuncionarioViewModel.DateOfBirth" />
-	</div>
-	<div class="mb-3">
-		<label class="form-label">Departamento</label>
-		<input type="text" class="form-control " asp-for="EditFuncionarioViewModel.Departament" />
-	</div>
-	<div class="mb-3 d-flex justify-content-between">
-		<button type="submit" class="btn btn-primary" asp-page-handler="Update">
-			Atualizar
-		</button>
-		<button type="submit" class=" btn btn-danger" asp-page-handler="Delete">
-			Delete
-		</button>
-		<button type="button" class="btn btn-secondary" onclick="history.back()">
-			Voltar
-		</button>
-	</div>
+    <div class="mb-3">
+        <label class="form-label">Id</label>
+        <input type="text" class="form-control" asp-for="EditFuncionarioViewModel.Id" readonly>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Nome</label>
+        <input type="text" class="form-control" asp-for="EditFuncionarioViewModel.Name" required>
+        <div class="invalid-feedback">Por favor, preencha o campo Nome.</div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" asp-for="EditFuncionarioViewModel.Email" required>
+        <div class="invalid-feedback">Por favor, preencha um email válido.</div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Salário</label>
+        <input type="number" class="form-control" asp-for="EditFuncionarioViewModel.Salary" required>
+        <div class="invalid-feedback">Por favor, preencha o campo Salário.</div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Data de Nascimento</label>
+        <input type="date" class="form-control" asp-for="EditFuncionarioViewModel.DateOfBirth" required>
+        <div class="invalid-feedback">Por favor, preencha a Data de Nascimento.</div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Departamento</label>
+        <input type="text" class="form-control" asp-for="EditFuncionarioViewModel.Departament" required>
+        <div class="invalid-feedback">Por favor, preencha o campo Departamento.</div>
+    </div>
+
+    <div class="mb-3 d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary" asp-page-handler="Update">Atualizar</button>
+        <button type="submit" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
+        <button type="button" class="btn btn-secondary" onclick="location.href='/Funcionarios/list'">Voltar</button>
+
+    </div>
 </form>
+
+<script>
+    // Validação do lado do cliente usando JavaScript
+    (function () {
+        'use strict';
+        // Obtém todos os formulários que precisam de validação
+        var forms = document.querySelectorAll('.needs-validation');
+
+        // Loop através dos formulários e previne o envio vazio
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
