@@ -1,0 +1,38 @@
+﻿@page
+@model RazorPagesCrud.Pages.Funcionarios.ListModel
+@{
+}
+
+
+<h1 class="mb-3">Lista de Funcionários</h1>
+
+@if(Model.Funcionarios != null && Model.Funcionarios.Any())
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id </th>
+					<th>Name </th>
+					<th>Email </th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			@foreach (var funcionario in Model.Funcionarios )
+			{
+					<tr>
+						<td>@funcionario.Id</td>
+						<td>@funcionario.Name</td>
+						<td>@funcionario.Email</td>
+						<th>
+							<a href="/Funcionarios/Edit/@funcionario.Id" class="btn btn-dark">Edit</a>
+						</th>
+					</tr>
+			}
+			</tbody> 
+		</table>
+
+	}
+	else{
+		<p>Não há funcionários</p>
+	}
